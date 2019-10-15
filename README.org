@@ -1,2 +1,1 @@
-#+TITLE: DynamoDB Local for ARMv7
-
+#+TITLE: DynamoDB Local for Raspberry Pi (ARMv7)
