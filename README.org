@@ -9,7 +9,7 @@ make build
 ** Start docker container
 
 #+BEGIN_SRC
-docker run --rm --port 8191:8000 sximada/sximada/rpi-dynamodb-local:201910.01
+docker run --rm --port 8191:8000 sximada/rpi-dynamodb-local:201910.01
 #+END_SRC
 
 ** Control with awscli
