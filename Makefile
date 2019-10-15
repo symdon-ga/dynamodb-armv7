@@ -1,4 +1,4 @@
-IMAGE := sximada/rpi-dynamodb-local:201910.01
+IMAGE := sximada/rpi-dynamodb-local:201910.02
 
 .PHONY: build
 build: download
