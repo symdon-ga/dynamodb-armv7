@@ -86,3 +86,8 @@ com.almworks.sqlite4java.SQLiteException: [21] DB[1] step() [SELECT ObjectJSON F
 	at com.almworks.sqlite4java.SQLiteQueue$1.run(SQLiteQueue.java:205)
 	at java.lang.Thread.run(Thread.java:748)
 #+END_EXAMPLE
+
+** Tasks
+
+*** TODO Rename repository to symdon-dynamodb
+    
