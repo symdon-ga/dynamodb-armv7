@@ -1,1 +1,88 @@
 #+TITLE: DynamoDB Local for Raspberry Pi (ARMv7)
+
+** Build Image and push
+
+#+BEGIN_SRC
+make build
+#+END_SRC
+
+** Start docker container
+
+#+BEGIN_SRC
+docker run --rm --port 8191:8000 sximada/sximada/rpi-dynamodb-local:201910.01
+#+END_SRC
+
+** Control with awscli
+
+*** Create table
+
+#+BEGIN_SRC
+aws dynamodb create-table --table-name 'cities' --attribute-definitions '[{"AttributeName":"key","AttributeType": "S"}]' --key-schema '[{"AttributeName":"key","KeyType": "HASH"}]' --provisioned-throughput '{"ReadCapacityUnits": 5,"WriteCapacityUnits": 5}' --endpoint-url http://localhost:8191
+#+END_SRC
+
+Output::
+
+#+BEGIN_EXAMPLE
+{
+    "TableDescription": {
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "key",
+                "AttributeType": "S"
+            }
+        ],
+        "TableName": "cities",
+        "KeySchema": [
+            {
+                "AttributeName": "key",
+                "KeyType": "HASH"
+            }
+        ],
+        "TableStatus": "ACTIVE",
+        "CreationDateTime": 1571119192.907,
+        "ProvisionedThroughput": {
+            "LastIncreaseDateTime": 0.0,
+            "LastDecreaseDateTime": 0.0,
+            "NumberOfDecreasesToday": 0,
+            "ReadCapacityUnits": 5,
+            "WriteCapacityUnits": 5
+        },
+        "TableSizeBytes": 0,
+        "ItemCount": 0,
+        "TableArn": "arn:aws:dynamodb:ddblocal:000000000000:table/cities",
+        "BillingModeSummary": {
+            "BillingMode": "PROVISIONED",
+            "LastUpdateToPayPerRequestDateTime": 0.0
+        }
+    }
+}
+#+END_EXAMPLE
+
+*** Put item
+
+#+BEGIN_SRC
+aws dynamodb put-item --table-name cities --item '{ "key": { "S": "t0924" }}' --endpoint-url http://localhost:8191
+#+END_SRC
+
+**** TODO Internal Server Error occurs when executing command
+
+#+BEGIN_EXAMPLE
+Oct 15, 2019 6:01:47 AM com.almworks.sqlite4java.Internal log
+WARNING: [sqlite] SQLiteDBAccess$14@fd0b8c: job exception
+com.almworks.sqlite4java.SQLiteException: [21] DB[1] step() [SELECT ObjectJSON FROM "cities" WHERE hashKey = ?;]DB[1][C] [unknown error]
+	at com.almworks.sqlite4java.SQLiteConnection.throwResult(SQLiteConnection.java:1436)
+	at com.almworks.sqlite4java.SQLiteConnection$BaseController.throwResult(SQLiteConnection.java:1689)
+	at com.almworks.sqlite4java.SQLiteStatement.stepResult(SQLiteStatement.java:1402)
+	at com.almworks.sqlite4java.SQLiteStatement.step(SQLiteStatement.java:301)
+	at com.amazonaws.services.dynamodbv2.local.shared.access.sqlite.SQLiteDBAccessJob.getRecordInternal(SQLiteDBAccessJob.java:222)
+	at com.amazonaws.services.dynamodbv2.local.shared.access.sqlite.SQLiteDBAccess$14.doWork(SQLiteDBAccess.java:1553)
+	at com.amazonaws.services.dynamodbv2.local.shared.access.sqlite.SQLiteDBAccess$14.doWork(SQLiteDBAccess.java:1549)
+	at com.amazonaws.services.dynamodbv2.local.shared.access.sqlite.AmazonDynamoDBOfflineSQLiteJob.job(AmazonDynamoDBOfflineSQLiteJob.java:117)
+	at com.almworks.sqlite4java.SQLiteJob.execute(SQLiteJob.java:372)
+	at com.almworks.sqlite4java.SQLiteQueue.executeJob(SQLiteQueue.java:534)
+	at com.almworks.sqlite4java.SQLiteQueue.queueFunction(SQLiteQueue.java:667)
+	at com.almworks.sqlite4java.SQLiteQueue.runQueue(SQLiteQueue.java:623)
+	at com.almworks.sqlite4java.SQLiteQueue.access$000(SQLiteQueue.java:77)
+	at com.almworks.sqlite4java.SQLiteQueue$1.run(SQLiteQueue.java:205)
+	at java.lang.Thread.run(Thread.java:748)
+#+END_EXAMPLE
