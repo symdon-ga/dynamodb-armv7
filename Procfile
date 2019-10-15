@@ -1,0 +1,2 @@
+-BUILD: make build
+-DEPLOY: cd ansible && ansible-playbook site.yaml
