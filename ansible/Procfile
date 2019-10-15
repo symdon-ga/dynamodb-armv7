@@ -1,0 +1,2 @@
+-DEPLOY: ansible-playbook site.yaml
+

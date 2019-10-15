@@ -1,0 +1,8 @@
+---
+# handlers file for symdon_rpi_dynamodb_local
+- listen: service dynamodb reload
+  systemd:
+    name: "{{ symdon_rpi_dynamodb_local_systemd_service_name }}.service"
+    state: restarted
+    daemon_reload: yes
+

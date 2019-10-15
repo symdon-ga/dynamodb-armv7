@@ -1,0 +1,11 @@
+---
+# defaults file for symdon_rpi_dynamodb_local
+symdon_rpi_dynamodb_local_docker_image: "sximada/rpi-dynamodb-local:201910.02"
+symdon_rpi_dynamodb_local_env_dir: "/opt/rpi-dynamodb-local"
+symdon_rpi_dynamodb_local_env_file: ".env"
+symdon_rpi_dynamodb_local_log_dir: "/opt/rpi-dynamodb-local/log"
+symdon_rpi_dynamodb_local_log_file: "app.log"
+symdon_rpi_dynamodb_local_port: "8191"
+symdon_rpi_dynamodb_local_root_dir: "/opt/rpi-dynamodb-local"
+symdon_rpi_dynamodb_local_systemd_dir: "/opt/rpi-dynamodb-local/systemd"
+symdon_rpi_dynamodb_local_systemd_service_name: "dynamodb"

@@ -1,0 +1,7 @@
+- name: All deploy
+  hosts: all
+  gather_facts: no
+  become: yes
+  roles:
+    - role: symdon_rpi_dynamodb_local
+      

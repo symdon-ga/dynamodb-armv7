@@ -1,0 +1,16 @@
+---
+# tasks file for symdon_rpi_dynamodb_local
+- include: deploy.yaml
+  vars:
+    cmd: "docker run --rm -p {{ symdon_rpi_dynamodb_local_port }}:8000 {{ symdon_rpi_dynamodb_local_docker_image }}"
+    cwd: "{{ symdon_rpi_dynamodb_local_root_dir }}"
+    desc: "RPI DynamoDB Local"
+    docker_image: "{{ symdon_rpi_dynamodb_local_docker_image }}"
+    env_dir: "{{ symdon_rpi_dynamodb_local_env_dir }}"
+    env_file: "{{ symdon_rpi_dynamodb_local_env_file }}"
+    log_dir: "{{ symdon_rpi_dynamodb_local_log_dir }}"
+    log_file: "{{ symdon_rpi_dynamodb_local_log_file }}"
+    port: "{{ symdon_rpi_dynamodb_local_port }}"
+    root_dir: "{{ symdon_rpi_dynamodb_local_root_dir }}"
+    service_name: "{{ symdon_rpi_dynamodb_local_systemd_service_name }}"
+    systemd_dir: "{{ symdon_rpi_dynamodb_local_systemd_dir }}"
